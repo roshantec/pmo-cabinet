@@ -39,55 +39,49 @@ document.addEventListener('DOMContentLoaded', function () {
         body.style.fontSize = `${newSize}px`;
     }
 
-    // Existing script for menu toggle and search overlay
-const menuToggle = document.getElementById('menuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-const closeMenu = document.getElementById('closeMenu');
-const searchToggle = document.getElementById('searchToggle');
-const searchOverlay = document.getElementById('searchOverlay');
-const closeSearch = document.getElementById('closeSearch');
-
-document.addEventListener('DOMContentLoaded', function () {
+   // Mobile menu toggle and search overlay
+function setupMenuToggle() {
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
-    const searchToggle = document.getElementById('searchToggle');
-    const searchOverlay = document.getElementById('searchOverlay');
-    const closeSearch = document.getElementById('closeSearch');
+    const menuOverlay = document.getElementById('menuOverlay');
 
-    // Mobile menu toggle
-    if (menuToggle && mobileMenu && closeMenu) {
-        menuToggle.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
+    if (menuToggle && mobileMenu && closeMenu && menuOverlay) {
+        function toggleMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+            menuOverlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
 
-        closeMenu.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-        });
+        menuToggle.addEventListener('click', toggleMenu);
+        closeMenu.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+    } else {
+        console.error('Menu elements not found in the DOM.');
     }
-
-    // Search overlay toggle
-    if (searchToggle && searchOverlay && closeSearch) {
-        searchToggle.addEventListener('click', function() {
-            searchOverlay.classList.toggle('hidden');
-        });
-
-        closeSearch.addEventListener('click', function() {
-            searchOverlay.classList.add('hidden');
-        });
-    }
-});
-
-// Additional search overlay handling (Ensure elements are present)
-if (searchToggle && searchOverlay && closeSearch) {
-    searchToggle.addEventListener('click', () => {
-        searchOverlay.classList.remove('hidden');
-    });
-
-    closeSearch.addEventListener('click', () => {
-        searchOverlay.classList.add('hidden');
-    });
 }
+
+// Call the function when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', setupMenuToggle);
+
+    function setupSearchToggle() {
+        const searchToggle = document.getElementById('searchToggle');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const closeSearch = document.getElementById('closeSearch');
+    
+        if (searchToggle && searchOverlay && closeSearch) {
+            searchToggle.addEventListener('click', () => {
+                searchOverlay.classList.remove('hidden');
+            });
+    
+            closeSearch.addEventListener('click', () => {
+                searchOverlay.classList.add('hidden');
+            });
+        } else {
+            console.warn('Search elements not found in the DOM.');
+        }
+    }
+    
 
     // Feedback form handler
     function setupFeedbackForm() {
@@ -158,22 +152,31 @@ if (searchToggle && searchOverlay && closeSearch) {
         const slides = document.querySelectorAll('.slider-item');
         let currentSlide = 0;
         const totalSlides = slides.length;
-
-        function nextSlide() {
-            slides[currentSlide].classList.remove('opacity-100');
-            slides[currentSlide].classList.add('opacity-0');
-            slides[currentSlide].style.zIndex = '0';
-
-            currentSlide = (currentSlide + 1) % totalSlides;
-
-            slides[currentSlide].classList.remove('opacity-0');
-            slides[currentSlide].classList.add('opacity-100');
-            slides[currentSlide].style.zIndex = '10';
+    
+        if (totalSlides === 0) {
+            console.warn('No slides found in the DOM.');
+            return;
         }
-
+    
+        function nextSlide() {
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.remove('opacity-100');
+                slides[currentSlide].classList.add('opacity-0');
+                slides[currentSlide].style.zIndex = '0';
+            }
+    
+            currentSlide = (currentSlide + 1) % totalSlides;
+    
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.remove('opacity-0');
+                slides[currentSlide].classList.add('opacity-100');
+                slides[currentSlide].style.zIndex = '10';
+            }
+        }
+    
         setInterval(nextSlide, 5000);
     }
-
+    
     // Contact form handler
     function setupContactForm() {
         const contactForm = document.querySelector('form');
@@ -229,43 +232,3 @@ if (searchToggle && searchOverlay && closeSearch) {
     window.changeTextSize = changeTextSize;
 });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    const teamMembers = document.querySelectorAll('.team-member');
-    const searchInput = document.getElementById('team-search');
-    const filterSelect = document.getElementById('team-filter');
-
-    function filterMembers() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filterDepartment = filterSelect.value;
-
-        teamMembers.forEach(member => {
-            const name = member.querySelector('h3').textContent.toLowerCase();
-            const department = member.dataset.department;
-            const matchesSearch = name.includes(searchTerm);
-            const matchesFilter = filterDepartment === '' || department.includes(filterDepartment);
-
-            if (matchesSearch && matchesFilter) {
-                member.style.display = 'block';
-            } else {
-                member.style.display = 'none';
-            }
-        });
-    }
-
-    searchInput.addEventListener('input', filterMembers);
-    filterSelect.addEventListener('change', filterMembers);
-
-    // Add hover effects
-    teamMembers.forEach(member => {
-        member.addEventListener('mouseover', function() {
-            this.classList.add('shadow-xl');
-            this.style.transform = 'translateY(-5px)';
-        });
-
-        member.addEventListener('mouseout', function() {
-            this.classList.remove('shadow-xl');
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
