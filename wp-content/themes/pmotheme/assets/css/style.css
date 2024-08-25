@@ -1,0 +1,132 @@
+.slider-wrapper {
+    position: relative;
+    height: 400px; /* Adjust based on your needs */
+}
+
+.slider-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    inset: 0;
+}
+
+.slider-item.opacity-100 {
+    opacity: 1;
+}
+
+.slider-item:first-child {
+    opacity: 1;
+    z-index: 10;
+}
+
+.team-member {
+    transition: all 0.3s ease;
+}
+
+/* menu button hover */
+/* Base styling for .btn-8 */
+.btn-8 {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    color: inherit;
+  }
+  
+  /* On hover, change text color and border color with a smooth transition */
+  .btn-8:hover {
+    color: #D2691E; /* Bhutan Red */
+    border-color: orange; /* Orange border */
+  }
+  
+  /* Optional: If you want to keep the hover effect inside a span, you can do this */
+  .btn-8 span {
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+  
+  /* When hovering over the .btn-8, change the span color */
+  .btn-8:hover span {
+    color: #D2691E; /* Bhutan Red */
+  }
+
+/* Sub-menu */
+nav .sub-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+/* Show sub-menu when hovering over the parent menu item */
+nav li:hover > .sub-menu {
+    display: block;
+}
+
+/* Style the sub-menu items */
+/* Sub-menu */
+nav .sub-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+    min-width: 200px; /* Ensure the sub-menu has a consistent width */
+}
+
+/* Adjust the parent item to position sub-menus correctly */
+nav li {
+    position: relative; /* Ensure the sub-menu is positioned relative to its parent */
+}
+
+/* Show sub-menu when hovering over the parent menu item */
+nav li:hover > .sub-menu {
+    display: block;
+}
+
+/* Style the sub-menu items */
+nav .sub-menu li {
+    margin: 0;
+    padding: 8px 12px;
+}
+
+nav .sub-menu li a {
+    color: #333;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Sub-menu item hover effect: Add bottom border/underline */
+nav .sub-menu li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+nav .sub-menu li a:hover::after {
+    background-color: orange; /* Bottom border color */
+    width: 100%;
+}
+
+nav .sub-menu li a:hover {
+    color: #D2691E; /* Bhutan Red text color on hover */
+}

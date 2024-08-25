@@ -1,0 +1,40 @@
+/*
+Theme Name: PMO Theme
+Theme URI: http://pmo.gov.bt/
+Author: Ujwal Pradhan
+Author URI: https://ujwal-pradhan.vercel.app
+Description: A custom theme for the Prime Minister's Office of Bhutan.
+Version: 1.0
+*/
+
+/* Add this to your theme's style.css file */
+
+:root {
+    --bhutan-amber: #FF8C00;
+    --bhutan-red: #D2691E;
+    --bhutan-gold: #FFD700;
+}
+
+.text-bhutan-red {
+    color: var(--bhutan-red);
+}
+
+.text-bhutan-amber {
+    color: var(--bhutan-amber);
+}
+
+.bg-bhutan-red {
+    background-color: var(--bhutan-red);
+}
+
+.bg-bhutan-amber {
+    background-color: var(--bhutan-amber);
+}
+
+.hover\:bg-bhutan-red:hover {
+    background-color: var(--bhutan-red);
+}
+
+.hover\:text-bhutan-amber:hover {
+    color: var(--bhutan-amber);
+}

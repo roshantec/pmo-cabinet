@@ -51,32 +51,60 @@
 
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <?php if (get_theme_mod('pmotheme_logo')) : ?>
-                        <img src="<?php echo esc_url(get_theme_mod('pmotheme_logo')); ?>" alt="Logo" class="h-12 md:h-16">
-                    <?php else : ?>
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/rgob.png" alt="RGOB Logo" class="h-12 md:h-16">
-                    <?php endif; ?>
-                </div>
-                <nav class="hidden md:block">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <?php if (get_theme_mod('pmotheme_logo')) : ?>
+                    <img src="<?php echo esc_url(get_theme_mod('pmotheme_logo')); ?>" alt="Logo" class="h-12 md:h-16">
+                <?php else : ?>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/rgob.png" alt="RGOB Logo" class="h-12 md:h-16">
+                <?php endif; ?>
+            </div>
+            <nav class="hidden md:block mt-8">
                     <?php
                     wp_nav_menu(array(
                         'theme_location' => 'primary',
-                        'menu_class' => 'flex space-x-6',
+                        'menu_class' => 'flex space-x-6', // Container class for the menu items
                         'container' => false,
+                        'link_before' => '<span class="btn-8">',
+                        'link_after' => '</span>',
                     ));
                     ?>
-                </nav>
-                <div class="flex items-center space-x-4">
-                    <button id="searchToggle" class="text-gray-700 hover:text-bhutan-red transition duration-300" aria-label="Toggle search">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button id="menuToggle" class="md:hidden text-gray-700 hover:text-bhutan-red transition duration-300" aria-label="Toggle menu">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button id="searchToggle" class="text-gray-700 hover:text-bhutan-red transition duration-300" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="menuToggle" class="md:hidden text-gray-700 hover:text-bhutan-red transition duration-300" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
-    </header>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <<div id="mobileMenu" class="fixed inset-0 z-40 bg-white hidden flex flex-col w-3/4 max-w-sm shadow-lg transform translate-x-full transition-transform duration-300">
+    <div class="relative h-1/3 w-1/3">
+        <div class="flex justify-end p-4 mt-24">
+            <button id="closeMenu" class="text-gray-700 ">
+                <i class="fas fa-times text-2xl "></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4 p-4">
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'primary',
+                'menu_class' => 'flex flex-col space-y-4 text-lg text-gray-700 hover:text-bhutan-red transition duration-300',
+                'container' => false,
+            ));
+            ?>
+        </nav>
+    </div>
+</div>
+
+<!-- Overlay Background -->
+<div id="menuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
+
+</header>
