@@ -9,9 +9,9 @@ Template Name: Custom Homepage
 
 <!-- Main content -->
 <!-- Slider Area -->
-<section class="bg-gray-200 py-12">
-    <div class="container mx-auto px-4">
-        <div class="slider-wrapper relative bg-white rounded-lg shadow-md overflow-hidden">
+<section class="bg-gray-200 h-[70vh] w-full">
+    <div class="w-full h-full px-0">
+        <div class="slider-wrapper relative bg-white shadow-md overflow-hidden h-full w-full">
             <?php
             $slider_query = new WP_Query(array(
                 'post_type' => 'slider',
@@ -25,9 +25,9 @@ Template Name: Custom Homepage
                     $slider_count++;
             ?>
 
-                    <div class="slider-item absolute inset-0 transition-opacity duration-1000 <?php echo $slider_count === 1 ? 'opacity-100' : 'opacity-0'; ?>">
+                    <div class="slider-item absolute inset-0 transition-opacity duration-1000 <?php echo $slider_count === 1 ? 'opacity-100' : 'opacity-0'; ?> h-full w-full">
                         <?php if (has_post_thumbnail()) : ?>
-                            <div class="relative w-full h-full md:h-full">
+                            <div class="relative w-full h-full">
                                 <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>" class="absolute inset-0 w-full h-full object-cover z-0">
                                 <div class="absolute inset-0 bg-black bg-opacity-50 z-10 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
@@ -48,6 +48,8 @@ Template Name: Custom Homepage
         </div>
     </div>
 </section>
+
+
 
 <!-- Latest News and Posts -->
 <section class="py-12">
